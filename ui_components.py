@@ -407,6 +407,84 @@ def display_analysis_table(df: pd.DataFrame, title: str, format_columns: Dict[st
     )
 
 
+def create_professional_report_section(data_processor) -> None:
+    """Create professional report generation section."""
+    st.subheader("📋 专业报告生成 Professional Reports")
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        if st.button("📄 生成PDF报告", use_container_width=True, help="生成专业的PDF投资分析报告"):
+            try:
+                with st.spinner("正在生成PDF报告..."):
+                    pdf_data = data_processor.generate_professional_report('pdf')
+                    st.download_button(
+                        label="📥 下载PDF报告",
+                        data=pdf_data,
+                        file_name=f"sp500_analysis_report_{pd.Timestamp.now().strftime('%Y%m%d')}.pdf",
+                        mime="application/pdf",
+                        use_container_width=True
+                    )
+                    st.success("PDF报告生成成功！")
+            except Exception as e:
+                st.error(f"PDF报告生成失败: {str(e)}")
+
+    with col2:
+        if st.button("📊 生成Excel报告", use_container_width=True, help="生成结构化的Excel数据报告"):
+            try:
+                with st.spinner("正在生成Excel报告..."):
+                    excel_data = data_processor.generate_professional_report('excel')
+                    st.download_button(
+                        label="📥 下载Excel报告",
+                        data=excel_data,
+                        file_name=f"sp500_analysis_data_{pd.Timestamp.now().strftime('%Y%m%d')}.xlsx",
+                        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        use_container_width=True
+                    )
+                    st.success("Excel报告生成成功！")
+            except Exception as e:
+                st.error(f"Excel报告生成失败: {str(e)}")
+
+    with col3:
+        if st.button("📈 导出图表", use_container_width=True, help="导出高质量的分析图表"):
+            try:
+                with st.spinner("正在导出图表..."):
+                    chart_data = data_processor.export_chart('risk_metrics', 'png')
+                    st.download_button(
+                        label="📥 下载图表",
+                        data=chart_data,
+                        file_name=f"sp500_risk_metrics_chart_{pd.Timestamp.now().strftime('%Y%m%d')}.png",
+                        mime="image/png",
+                        use_container_width=True
+                    )
+                    st.success("图表导出成功！")
+            except Exception as e:
+                st.error(f"图表导出失败: {str(e)}")
+
+    # Report features description
+    with st.expander("📋 报告功能说明", expanded=False):
+        st.markdown("""
+        **PDF报告特色：**
+        - 🎨 专业的品牌设计和排版
+        - 📊 完整的风险指标分析
+        - 📈 高质量的图表展示
+        - 📝 详细的方法论说明
+        - ⚖️ 风险披露和免责声明
+
+        **Excel报告特色：**
+        - 📋 结构化的数据表格
+        - 🎯 自动格式化和样式
+        - 📊 内置图表和分析
+        - 💾 便于进一步分析
+
+        **图表导出特色：**
+        - 🖼️ 高分辨率PNG格式
+        - 📐 专业的设计风格
+        - 🎨 品牌色彩方案
+        - 📱 适合演示和报告
+        """)
+
+
 def create_download_section(data_dict: Dict[str, Any], filename_prefix: str = "sp500_analysis", layout: str = "desktop"):
     """Create download buttons for analysis results.
     - 桌面端默认：数据导出在左侧垂直排列；AI 报告导出在右侧。

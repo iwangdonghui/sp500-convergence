@@ -20,6 +20,9 @@ import numpy as np
 import pandas as pd
 import requests
 
+# Import risk metrics module
+from risk_metrics import RiskMetricsCalculator, RiskFreeRateProvider, calculate_rolling_risk_metrics
+
 # Suppress warnings for cleaner output
 warnings.filterwarnings('ignore')
 
@@ -33,17 +36,21 @@ SLICKCHARTS_URL = "https://www.slickcharts.com/sp500/returns/history.csv"
 
 class SP500Analyzer:
     """Main class for S&P 500 rolling returns analysis."""
-    
+
     def __init__(self, data: pd.DataFrame):
         """
         Initialize with S&P 500 data.
-        
+
         Args:
             data: DataFrame with 'year' and 'return' columns
         """
         self.data = data.sort_values('year').reset_index(drop=True)
         self.years = self.data['year'].tolist()
         self.returns = self.data['return'].tolist()
+
+        # Initialize risk-free rate provider
+        self.rf_provider = RiskFreeRateProvider()
+        self._risk_free_rates = None
         
     def compute_rolling_cagr(self, window_size: int, start_year: int) -> List[Tuple[int, float]]:
         """
@@ -307,6 +314,113 @@ class SP500Analyzer:
             'spread': np.nan,
             'note': 'No feasible windows'
         }
+
+    def get_risk_free_rates(self, start_year: int, end_year: int) -> List[float]:
+        """
+        Get risk-free rates for the specified period.
+
+        Args:
+            start_year: Starting year
+            end_year: Ending year
+
+        Returns:
+            List of annual risk-free rates
+        """
+        rf_data = self.rf_provider.get_risk_free_rate(start_year, end_year)
+        return rf_data['risk_free_rate'].tolist()
+
+    def compute_risk_metrics(self, start_year: int, window_size: Optional[int] = None) -> Dict[str, Any]:
+        """
+        Compute risk metrics for the entire period or a specific window.
+
+        Args:
+            start_year: Starting year for analysis
+            window_size: Window size in years (if None, use entire period)
+
+        Returns:
+            Dictionary with risk metrics
+        """
+        try:
+            start_idx = self.years.index(start_year)
+        except ValueError:
+            return {}
+
+        if window_size is None:
+            # Use entire period from start_year
+            period_returns = self.returns[start_idx:]
+            period_years = self.years[start_idx:]
+        else:
+            # Use specific window
+            if start_idx + window_size > len(self.years):
+                return {}
+            period_returns = self.returns[start_idx:start_idx + window_size]
+            period_years = self.years[start_idx:start_idx + window_size]
+
+        if len(period_returns) < 2:
+            return {}
+
+        # Get risk-free rates for the period
+        rf_rates = self.get_risk_free_rates(period_years[0], period_years[-1])
+
+        # Calculate risk metrics
+        calculator = RiskMetricsCalculator(period_returns, rf_rates)
+        metrics = calculator.all_metrics()
+
+        # Add period information
+        metrics['start_year'] = period_years[0]
+        metrics['end_year'] = period_years[-1]
+        metrics['period_length'] = len(period_returns)
+
+        # Calculate CAGR for reference
+        total_return = np.prod([1 + r for r in period_returns])
+        cagr = (total_return ** (1/len(period_returns))) - 1
+        metrics['cagr'] = cagr
+
+        return metrics
+
+    def compute_rolling_risk_metrics(self, start_year: int, window_size: int) -> List[Dict[str, Any]]:
+        """
+        Compute rolling risk metrics for a given window size.
+
+        Args:
+            start_year: Starting year for analysis
+            window_size: Rolling window size in years
+
+        Returns:
+            List of dictionaries with risk metrics for each window
+        """
+        try:
+            start_idx = self.years.index(start_year)
+        except ValueError:
+            return []
+
+        # Get returns from start_year onwards
+        period_returns = self.returns[start_idx:]
+        period_years = self.years[start_idx:]
+
+        if len(period_returns) < window_size:
+            return []
+
+        # Get risk-free rates for the entire period
+        rf_rates = self.get_risk_free_rates(period_years[0], period_years[-1])
+
+        # Calculate rolling metrics
+        rolling_metrics = calculate_rolling_risk_metrics(period_returns, window_size, rf_rates)
+
+        # Add year information to each window
+        for i, metrics in enumerate(rolling_metrics):
+            window_start_year = period_years[i]
+            window_end_year = period_years[i + window_size - 1]
+            metrics['start_year'] = window_start_year
+            metrics['end_year'] = window_end_year
+
+            # Calculate CAGR for this window
+            window_returns = period_returns[i:i + window_size]
+            total_return = np.prod([1 + r for r in window_returns])
+            cagr = (total_return ** (1/window_size)) - 1
+            metrics['cagr'] = cagr
+
+        return rolling_metrics
 
 
 def download_slickcharts_data() -> pd.DataFrame:

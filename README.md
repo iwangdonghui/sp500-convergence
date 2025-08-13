@@ -1,218 +1,262 @@
 ---
-title: SP500 Convergence
-emoji: 📈
+title: S&P 500 GIPS Compliance Analysis Platform
+emoji: 🏛️
 colorFrom: blue
 colorTo: green
-sdk: docker
-app_port: 7860
+sdk: streamlit
+app_file: app.py
 pinned: false
+license: mit
 ---
 
+# 🏛️ S&P 500 GIPS Compliance Analysis Platform
 
-# S&P 500 Rolling Returns and Convergence Analysis Tool
+A professional-grade investment performance analysis platform that combines comprehensive S&P 500 analysis with full GIPS (Global Investment Performance Standards) compliance capabilities. This tool transforms from a basic analysis utility into an institutional-level investment performance platform.
 
-A comprehensive Python CLI tool for analyzing long-horizon rolling S&P 500 returns and "convergence" metrics using nominal total returns (no inflation adjustment).
+## 🌟 Key Features
 
-## Features
+### 📊 **Core S&P 500 Analysis**
+- **Automatic Data Download**: Real-time S&P 500 data from SlickCharts
+- **Rolling Returns Analysis**: Comprehensive CAGR analysis across multiple time horizons
+- **Convergence Metrics**: Statistical convergence analysis and visualization
+- **Risk Metrics**: Volatility, drawdown, and risk-adjusted return calculations
+- **No-Loss Analysis**: Minimum investment horizon analysis
 
-- **Automatic Data Download**: Downloads S&P 500 annual total returns from SlickCharts
-- **Flexible Input**: Accepts both downloaded data and local CSV files
-- **Smart Parsing**: Auto-detects CSV headers and normalizes return formats
-- **Multiple Baselines**: Supports custom start years (default: 1926, 1957, 1972, 1985)
-- **Comprehensive Analysis**: Computes rolling CAGR, window statistics, no-loss horizons, and convergence metrics
-- **Robust Output**: Generates multiple CSV files with detailed analysis results
+### 🏛️ **GIPS Compliance Engine** (NEW!)
+- **Time-Weighted Returns**: GIPS 2020 standard compliant calculations
+- **Money-Weighted Returns**: Newton-Raphson IRR calculations
+- **Performance Attribution**: Brinson-Hood-Beebower attribution analysis
+- **Benchmark Validation**: Appropriateness testing and standardization
+- **Compliance Reporting**: Professional GIPS-format reports
+- **Risk-Adjusted Metrics**: Alpha, Beta, Sharpe ratio, Information ratio
 
-## Installation
+### 🔍 **Multi-Asset Analysis**
+- **Asset Universe**: Stocks, bonds, commodities, REITs, international markets
+- **Correlation Analysis**: Dynamic correlation matrices and heatmaps
+- **Efficient Frontier**: Modern Portfolio Theory optimization
+- **Risk Decomposition**: Factor-based risk analysis
 
-1. Clone or download this repository
-2. Install required dependencies:
+### 📋 **Professional Reporting**
+- **Comprehensive Reports**: Multi-page PDF reports with charts and analysis
+- **GIPS Compliance Reports**: Standard-format compliance documentation
+- **Interactive Dashboards**: Real-time analysis and visualization
+- **Export Capabilities**: CSV, PDF, and Excel export options
 
+## 🚀 Quick Start
+
+### 🌐 **Web Application** (Recommended)
 ```bash
+# Clone the repository
+git clone https://github.com/your-username/sp500-gips-analysis.git
+cd sp500-gips-analysis
+
+# Install dependencies
 pip install -r requirements.txt
+
+# Launch the web application
+streamlit run app.py
 ```
 
-## Usage
+Then open http://localhost:8501 in your browser.
 
-### Basic Command Structure
-
+### 🖥️ **Command Line Interface**
 ```bash
-python sp500_convergence.py [OPTIONS]
+# Basic S&P 500 analysis
+python sp500_convergence.py --download_slickcharts
+
+# Custom analysis with specific parameters
+python sp500_convergence.py --download_slickcharts --start_years 1926,1957,1972,1985 --min_years 1 --max_years 50
 ```
 
-### Data Source Options
+## 📱 **Live Demo**
 
-**Download from SlickCharts (recommended):**
+🌐 **Try it now**: [Hugging Face Spaces Demo](https://huggingface.co/spaces/your-username/sp500-gips-analysis)
+
+## 🏛️ **GIPS Compliance Features**
+
+This platform implements the complete GIPS 2020 standards:
+
+### **Return Calculations**
+- ✅ Time-weighted returns (required)
+- ✅ Money-weighted returns (recommended)
+- ✅ Modified Dietz approximation
+- ✅ Composite return calculations
+
+### **Performance Attribution**
+- ✅ Brinson-Hood-Beebower attribution
+- ✅ Allocation, selection, and interaction effects
+- ✅ Risk-adjusted attribution analysis
+- ✅ Sector and style attribution
+
+### **Compliance Validation**
+- ✅ Benchmark appropriateness testing
+- ✅ Data quality validation
+- ✅ Calculation method verification
+- ✅ Disclosure requirement compliance
+
+## 📊 **Analysis Capabilities**
+### **Rolling Returns Analysis**
+- Multi-horizon CAGR calculations (1-50 years)
+- Statistical convergence analysis
+- Window-based performance metrics
+- Historical volatility and drawdown analysis
+
+### **Risk Metrics**
+- Value at Risk (VaR) calculations
+- Maximum drawdown analysis
+- Sharpe ratio and risk-adjusted returns
+- Volatility clustering analysis
+
+### **Visualization**
+- Interactive charts and heatmaps
+- Time series analysis plots
+- Correlation matrices
+- Efficient frontier visualization
+
+## 🎯 **Use Cases**
+
+### **Investment Management Firms**
+- GIPS compliance reporting for client presentations
+- Performance attribution analysis
+- Benchmark validation and selection
+- Risk management and monitoring
+
+### **Financial Advisors**
+- Client portfolio analysis
+- Investment strategy backtesting
+- Risk assessment and reporting
+- Educational tools for client meetings
+
+### **Academic Research**
+- Historical market analysis
+- Investment strategy research
+- Risk factor analysis
+- Performance measurement studies
+
+### **Individual Investors**
+- Portfolio performance evaluation
+- Investment strategy analysis
+- Risk assessment tools
+- Educational resources
+
+## 🛠️ **Technical Architecture**
+
+### **Core Components**
+- **Data Engine**: Real-time data acquisition and processing
+- **GIPS Calculator**: Standards-compliant return calculations
+- **Attribution Engine**: Multi-factor performance attribution
+- **Risk Engine**: Comprehensive risk metrics calculation
+- **Reporting Engine**: Professional report generation
+
+### **Technology Stack**
+- **Frontend**: Streamlit web application
+- **Backend**: Python with pandas, numpy
+- **Visualization**: Plotly interactive charts
+- **PDF Generation**: ReportLab for professional reports
+- **Data Sources**: SlickCharts, Yahoo Finance integration
+
+## 📋 **Output Capabilities**
+
+### **Interactive Reports**
+- Real-time analysis dashboard
+- Interactive charts and visualizations
+- Drill-down capabilities
+- Export functionality
+
+### **Professional Documents**
+- **GIPS Compliance Reports**: Standard-format PDF reports
+- **Performance Attribution Reports**: Detailed attribution analysis
+- **Risk Assessment Reports**: Comprehensive risk metrics
+- **Executive Summaries**: High-level performance overviews
+
+### **Data Export Options**
+- **CSV Files**: Raw data and analysis results
+- **Excel Workbooks**: Multi-sheet analysis reports
+- **PDF Documents**: Professional presentation-ready reports
+- **Interactive Charts**: Embeddable visualizations
+
+## 🔧 **Installation & Setup**
+
+### **Requirements**
+- Python 3.8 or higher
+- 2GB RAM minimum (4GB recommended)
+- Internet connection for data downloads
+
+### **Dependencies**
 ```bash
-python sp500_convergence.py --download_slickcharts [OTHER_OPTIONS]
+pip install streamlit pandas numpy plotly requests reportlab openpyxl
 ```
 
-**Use local CSV file:**
+### **Docker Deployment**
 ```bash
-python sp500_convergence.py --csv path/to/your/file.csv [OTHER_OPTIONS]
+docker build -t sp500-gips-analysis .
+docker run -p 8501:8501 sp500-gips-analysis
 ```
 
-### Required Parameters
+## 📚 **Documentation**
 
-- **Data source**: Either `--download_slickcharts` or `--csv <filepath>`
-- **Thresholds**: Either `--thresholds <comma_list>` or threshold range (`--thr_min`, `--thr_max`, `--thr_steps`)
+### **User Guides**
+- [Quick Start Guide](QUICK_START.md)
+- [GIPS Compliance Guide](STAGE4_FINAL_REPORT.md)
+- [UI User Guide](UI_GUIDE.md)
+- [Implementation Plan](IMPLEMENTATION_PLAN.md)
 
-### Example Commands
+### **Technical Documentation**
+- [Font Improvements](FONT_IMPROVEMENTS_SUMMARY.md)
+- [Stage 4 Completion](STAGE4_COMPLETION_SUMMARY.md)
+- [Terms Glossary](TERMS_GLOSSARY.md)
 
-#### Full Analysis with Default Parameters
+## 🤝 **Contributing**
+
+We welcome contributions! Areas for enhancement:
+- Additional asset classes and markets
+- Enhanced risk models
+- Advanced attribution methods
+- Mobile-responsive design improvements
+- Additional export formats
+
+### **Development Setup**
 ```bash
-python sp500_convergence.py \
-  --download_slickcharts \
-  --start_years 1926,1957,1972,1985 \
-  --thresholds 0.0025,0.005,0.0075,0.01 \
-  --outdir ./output
+git clone https://github.com/your-username/sp500-gips-analysis.git
+cd sp500-gips-analysis
+pip install -r requirements.txt
+streamlit run app.py
 ```
 
-#### Custom Start Years and Threshold Range
-```bash
-python sp500_convergence.py \
-  --download_slickcharts \
-  --start_years 1926,1957 \
-  --thr_min 0.0025 \
-  --thr_max 0.01 \
-  --thr_steps 16 \
-  --outdir ./custom_output
-```
+## 📄 **License**
 
-#### Using Local Data
-```bash
-python sp500_convergence.py \
-  --csv ./sp500_data.csv \
-  --start_years 1957,1972,1985 \
-  --thresholds 0.005,0.01 \
-  --outdir ./local_analysis
-```
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Output Files
+## 🏆 **Acknowledgments**
 
-The tool generates several CSV files in the specified output directory:
+- **GIPS Standards**: Global Investment Performance Standards (GIPS®) 2020
+- **Data Sources**: SlickCharts for historical S&P 500 data
+- **Technology**: Built with Streamlit, Plotly, and modern Python libraries
 
-### A) Rolling CAGR Tables
-- **Format**: One CSV per baseline start year
-- **Columns**: EndYear, 5y, 10y, 15y, 20y, 30y (values as decimals)
-- **Files**:
-  - `sp500_rolling_CAGR_1926_full_years.csv`
-  - `sp500_rolling_CAGR_1957_full_years.csv`
-  - `sp500_rolling_CAGR_1972_full_years.csv`
-  - `sp500_rolling_CAGR_1985_full_years.csv`
+## 📞 **Support & Contact**
 
-### B) Window Statistics
-- **Format**: One CSV per baseline start year
-- **Columns**: window_size, best_window, best_cagr, worst_window, worst_cagr, avg_cagr, count
-- **Files**:
-  - `sp500_rolling_summary_1926.csv`
-  - `sp500_rolling_summary_1957.csv`
-  - `sp500_rolling_summary_1972.csv`
-  - `sp500_rolling_summary_1985.csv`
+- **Issues**: [GitHub Issues](https://github.com/your-username/sp500-gips-analysis/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/your-username/sp500-gips-analysis/discussions)
+- **Documentation**: [Project Wiki](https://github.com/your-username/sp500-gips-analysis/wiki)
 
-### C) No-Loss Minimum Horizon
-- **File**: `min_no_loss_summary.csv`
-- **Columns**: start_year_series, min_holding_years, worst_window, worst_cagr, best_window, best_cagr, average_cagr, num_windows_checked
+## 🎯 **Roadmap**
 
-### D) Spread Threshold Grid
-- **File**: `min_spread_grid_nominal.csv`
-- **Columns**: start_year_series, threshold, min_holding_years, best_window, best_cagr, worst_window, worst_cagr, spread
+### **Upcoming Features**
+- [ ] Real-time portfolio tracking
+- [ ] Additional benchmark indices
+- [ ] Advanced risk models (VaR, CVaR)
+- [ ] Mobile application
+- [ ] API endpoints for integration
 
-## Data Processing
+### **Long-term Vision**
+- [ ] Multi-currency support
+- [ ] Alternative investment analysis
+- [ ] ESG integration
+- [ ] Machine learning predictions
+- [ ] Institutional client portal
 
-### Input Requirements
-- **Format**: CSV with year and total return columns
-- **Headers**: Auto-detected (supports both headerless and headed formats)
-- **Returns**: Automatically normalized to decimal format (e.g., 7.5% → 0.075)
-- **Validation**: Malformed rows are dropped, data is sorted by year
+---
 
-### Data Cleaning
-- Current (incomplete) year is automatically dropped to avoid YTD bias
-- Returns are normalized to decimal format regardless of input format
-- Data is sorted chronologically and validated
+**Transform your investment analysis with professional-grade GIPS compliance and comprehensive S&P 500 insights.** 🏛️📈
 
-### Computational Methods
-- **Geometric Compounding**: Uses log-sum vectorization for numerical stability
-- **Floating Point Tolerance**: 1e-12 for consistent comparisons
-- **Rolling Windows**: Computes returns for overlapping N-year periods
-
-## Algorithm Details
-
-### Rolling CAGR Calculation
-For a window of length N with yearly returns r_t:
-- **Total Return**: ∏(1 + r_t)
-- **CAGR**: (Total)^(1/N) - 1
-- **Implementation**: Uses log-sum method: exp(∑ln(1 + r_t))^(1/N) - 1
-
-### No-Loss Horizon
-Finds the smallest N such that every rolling N-year window has CAGR ≥ 0.
-
-### Convergence Metrics
-For each threshold, finds the smallest N where:
-max(CAGR) - min(CAGR) ≤ threshold
-
-## Error Handling
-
-- **Network Issues**: Graceful handling of download failures
-- **Data Quality**: Robust parsing with clear error messages
-- **Insufficient Data**: Clear warnings when requested windows cannot be computed
-- **Edge Cases**: Handles cases where conditions cannot be met within available data
-
-## Performance Considerations
-
-- **Vectorized Operations**: Uses NumPy for efficient array operations
-- **Memory Efficient**: Processes data in chunks where appropriate
-- **Scalable**: Handles large datasets efficiently
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Download Failures**: Check internet connection and try again
-2. **CSV Parsing Errors**: Ensure your CSV has at least 2 columns (year, return)
-3. **Memory Issues**: For very large datasets, consider processing in smaller chunks
-4. **Permission Errors**: Ensure write access to the output directory
-
-### Data Format Examples
-
-**Headerless CSV:**
-```
-1926,0.075
-1927,0.089
-1928,0.043
-```
-
-**Headed CSV:**
-```
-Year,Total_Return
-1926,7.5
-1927,8.9
-1928,4.3
-```
-
-## Contributing
-
-This tool is designed to be extensible. Key areas for enhancement:
-- Additional statistical measures
-- Support for other market indices
-- Inflation-adjusted analysis options
-- Interactive visualization capabilities
-
-## License
-
-This tool is provided as-is for educational and research purposes.
-
-## Citation
-
-If you use this tool in research, please cite:
-```
-S&P 500 Rolling Returns and Convergence Analysis Tool
-Data Engineer, 2024
-```
-
-## Support
-
-For issues or questions:
-1. Check the error messages for specific guidance
-2. Verify your input data format
-3. Ensure all required dependencies are installed
-4. Check that you have write permissions for the output directory
+*Built with ❤️ for the investment management community*

@@ -110,6 +110,31 @@ HELP_TEXT = {
 # CSS Styles
 CUSTOM_CSS = """
 <style>
+    /* 全局字体设置 */
+    .stApp {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    /* 中文字体优化 */
+    .stMarkdown, .stText, .stSelectbox, .stTextInput {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    /* 数字和百分比字体优化 */
+    .metric-value {
+        font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Source Code Pro", monospace;
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.2;
+    }
+
+    /* 标题字体优化 */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 600;
+        line-height: 1.3;
+    }
+
     .main-header {
         background: linear-gradient(90deg, #0B3B5A 0%, #0E7490 100%);
         padding: 2rem;
@@ -117,6 +142,7 @@ CUSTOM_CSS = """
         color: white;
         text-align: center;
         margin-bottom: 2rem;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
     .metric-card {
@@ -126,6 +152,62 @@ CUSTOM_CSS = """
         box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
         border-left: 4px solid #0B3B5A;
         margin-bottom: 1rem;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    /* GIPS合规性分析结果样式 */
+    .gips-result-container {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+    }
+
+    .gips-metric-title {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #64748b;
+        margin-bottom: 0.25rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .gips-metric-value {
+        font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Source Code Pro", monospace;
+        font-size: 1.875rem;
+        font-weight: 700;
+        color: #1e293b;
+        line-height: 1.1;
+        margin-bottom: 0.5rem;
+    }
+
+    .gips-compliance-status {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 1.125rem;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        display: inline-block;
+    }
+
+    .compliance-full {
+        background-color: #dcfce7;
+        color: #166534;
+        border: 1px solid #bbf7d0;
+    }
+
+    .compliance-partial {
+        background-color: #fef3c7;
+        color: #92400e;
+        border: 1px solid #fde68a;
+    }
+
+    .compliance-none {
+        background-color: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
     }
     
     .success-message {
@@ -155,10 +237,42 @@ CUSTOM_CSS = """
         margin: 1rem 0;
     }
     
+    /* Streamlit组件字体优化 */
+    .stMetric {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    .stMetric > div > div > div {
+        font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Source Code Pro", monospace;
+        font-weight: 600;
+    }
+
+    .stSelectbox > div > div > div {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    .stTextInput > div > div > input {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    /* 表格字体优化 */
+    .stDataFrame {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    .stDataFrame table {
+        font-size: 0.875rem;
+    }
+
+    .stDataFrame th {
+        font-weight: 600;
+        background-color: #f8fafc;
+    }
+
     .stTabs [data-baseweb="tab-list"] {
         gap: 2px;
     }
-    
+
     .stTabs [data-baseweb="tab"] {
         height: 50px;
         padding-left: 20px;
@@ -167,12 +281,15 @@ CUSTOM_CSS = """
         border-radius: 8px 8px 0 0;
         border: 1px solid #E5E7EB;
         border-bottom: none;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 500;
     }
 
     .stTabs [aria-selected="true"] {
         background-color: #0B3B5A;
         color: white;
         border-color: #0B3B5A;
+        font-weight: 600;
     }
 </style>
 """

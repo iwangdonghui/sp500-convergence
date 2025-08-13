@@ -15,4 +15,4 @@ ENV STREAMLIT_SERVER_HEADLESS=true \
     APP_FILE=app.py
 
 EXPOSE 7860
-CMD ["bash", "-lc", "streamlit run \"$APP_FILE\" --server.port 7860 --server.address 0.0.0.0 --browser.gatherUsageStats false"]
+CMD ["streamlit", "run", "app.py", "--server.port", "7860", "--server.address", "0.0.0.0", "--browser.gatherUsageStats", "false"]

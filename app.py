@@ -29,6 +29,9 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Debug: Add a simple indicator that this is the correct app
+st.write("🔍 DEBUG: 正在加载 S&P 500 分析工具...")
+
 
 def initialize_session_state():
     """Initialize session state variables."""
@@ -314,17 +317,28 @@ def display_convergence_analysis():
 
 def main():
     """Main application function."""
-    # Initialize session state
-    initialize_session_state()
-    
-    # Apply custom CSS
-    apply_custom_css()
-    
-    # Create header
-    create_header()
+    try:
+        # Initialize session state
+        initialize_session_state()
 
-    # 环境自检（默认隐藏，仅当在 secrets 中设置 SHOW_ENV_CHECK=true 时显示）
-    if st.secrets.get("SHOW_ENV_CHECK", False):
+        # Apply custom CSS
+        apply_custom_css()
+
+        # Create header
+        create_header()
+    except Exception as e:
+        st.error(f"应用初始化失败: {e}")
+        st.error(f"错误详情: {traceback.format_exc()}")
+        return
+
+    # 环境自检（默认隐藏；当 SHOW_ENV_CHECK=true 时显示；没有 secrets.toml 时忽略）
+    try:
+        # 注意：在完全没有 secrets 文件时，st.secrets.get 也会触发解析并抛错，这里兜底
+        show_env_check = bool(st.secrets.get("SHOW_ENV_CHECK", False))
+    except Exception:
+        show_env_check = False
+
+    if show_env_check:
         try:
             import reportlab  # type: ignore
             st.sidebar.success("PDF 组件：reportlab 可用")

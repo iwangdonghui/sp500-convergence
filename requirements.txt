@@ -1,6 +1,6 @@
-altair
-pandas==2.2.x
-streamlit==1.36.x
-numpy==1.26.x
-plotly==5.22.x
+streamlit==1.36.0
+pandas==2.2.2
+numpy==1.26.4
+plotly==5.22.0
+altair==5.5.0
 reportlab==3.6.13

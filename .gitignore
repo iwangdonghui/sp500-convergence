@@ -1,3 +1,49 @@
-.log
+# Logs
+*.log
+log/
+logs/
+
+# Environment
 .env
+.env.*
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Build & packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Testing
+.pytest_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Editors/OS
 .DS_Store
+.idea/
+.vscode/
+
+# Outputs & data
+out/
+data/
+# if you want to keep this directory, add a .gitkeep inside and remove the next line ignore
+# !data/.gitkeep
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Node
+node_modules/

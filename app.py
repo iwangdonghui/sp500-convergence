@@ -324,7 +324,14 @@ def main():
     create_header()
 
     # 环境自检（默认隐藏，仅当在 secrets 中设置 SHOW_ENV_CHECK=true 时显示）
-    if st.secrets.get("SHOW_ENV_CHECK", False):
+    show_env_check = False
+    try:
+        show_env_check = st.secrets.get("SHOW_ENV_CHECK", False)
+    except Exception:
+        # 在没有 secrets 文件时忽略
+        pass
+
+    if show_env_check:
         try:
             import reportlab  # type: ignore
             st.sidebar.success("PDF 组件：reportlab 可用")

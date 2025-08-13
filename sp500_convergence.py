@@ -319,7 +319,11 @@ def download_slickcharts_data() -> pd.DataFrame:
     print(f"Downloading data from {SLICKCHARTS_URL}...")
     
     try:
-        response = requests.get(SLICKCHARTS_URL, timeout=30)
+        # Add headers to avoid 403 Forbidden error
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
+        response = requests.get(SLICKCHARTS_URL, headers=headers, timeout=30)
         response.raise_for_status()
         
         # Try to read as CSV
@@ -351,10 +355,9 @@ def download_slickcharts_data() -> pd.DataFrame:
                     # Try to parse return value
                     ret_str = parts[1].strip().replace('%', '')
                     ret_val = float(ret_str)
-                    
-                    # Convert to decimal if it looks like percentage
-                    if abs(ret_val) > 1.0:
-                        ret_val = ret_val / 100.0
+
+                    # SlickCharts data is always in percentage format, so convert to decimal
+                    ret_val = ret_val / 100.0
                     
                     data.append([year, ret_val])
                 except (ValueError, IndexError):

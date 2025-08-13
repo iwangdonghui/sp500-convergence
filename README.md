@@ -1,3 +1,14 @@
+---
+title: SP500 Convergence
+emoji: 📈
+colorFrom: blue
+colorTo: green
+sdk: streamlit
+app_file: app.py
+pinned: false
+---
+
+
 # S&P 500 Rolling Returns and Convergence Analysis Tool
 
 A comprehensive Python CLI tool for analyzing long-horizon rolling S&P 500 returns and "convergence" metrics using nominal total returns (no inflation adjustment).
